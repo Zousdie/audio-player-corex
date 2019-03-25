@@ -1,0 +1,6 @@
+dist
+esm
+lib
+node_modules
+demo
+public/index.html

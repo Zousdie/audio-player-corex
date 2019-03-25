@@ -1,0 +1,48 @@
+{
+  "name": "audio-player-corex",
+  "version": "0.1.0",
+  "description": "Core audio player in the browser",
+  "main": "lib/index.js",
+  "module": "esm/index.js",
+  "typings": "types/index.d.ts",
+  "files": [
+    "lib",
+    "esm",
+    "types"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "prebuild": "rm -rf dist & rm -rf lib & rm -rf esm & rm -rf demo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zousdie/audio-player-corex.git"
+  },
+  "keywords": [
+    "audio",
+    "player"
+  ],
+  "author": "Jialiang T. (rememhe@outlook.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Zousdie/audio-player-corex/issues"
+  },
+  "homepage": "https://github.com/Zousdie/audio-player-corex#readme",
+  "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/runtime": "^7.4.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-transform-runtime": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "rollup": "^1.7.3",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-eslint": "^5.1.0",
+    "rollup-plugin-uglify": "^6.0.2"
+  }
+}
