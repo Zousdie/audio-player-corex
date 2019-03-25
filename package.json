@@ -1,7 +1,7 @@
 {
-  "name": "audio-player-corex",
+  "name": "audio-playerx",
   "version": "0.1.0",
-  "description": "Core audio player in the browser",
+  "description": "Audio player in the browser",
   "main": "lib/index.js",
   "module": "esm/index.js",
   "typings": "types/index.d.ts",
@@ -11,8 +11,9 @@
     "types"
   ],
   "scripts": {
-    "build": "rollup -c",
-    "prebuild": "rm -rf dist & rm -rf lib & rm -rf esm & rm -rf demo"
+    "dev": "rollup -c build/rollup.dev.js --environment BABEL_MODULE:umd --watch",
+    "build": "rollup -c build/rollup.config.js && rollup -c build/rollup.config.js --environment BABEL_MODULE:umd",
+    "prebuild": "rm -rf lib & rm -rf esm & rm -rf demo"
   },
   "repository": {
     "type": "git",
@@ -43,6 +44,9 @@
     "rollup": "^1.7.3",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-eslint": "^5.1.0",
+    "rollup-plugin-fill-html": "^1.1.0",
+    "rollup-plugin-livereload": "^1.0.0",
+    "rollup-plugin-serve": "^1.0.1",
     "rollup-plugin-uglify": "^6.0.2"
   }
 }

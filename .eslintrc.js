@@ -35,6 +35,7 @@ module.exports = {
     'max-len': ['error', { code: 120 }],
     'no-param-reassign': 'off',
     'func-names': 'off',
+    'no-underscore-dangle': 'off',
     'space-before-function-paren': [
       'error',
       {

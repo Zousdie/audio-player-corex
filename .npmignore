@@ -1,8 +1,10 @@
-node_modules
+build
+examples
 src
-.DS_Store
+
 .editorconfig
 .eslintignore
 .eslintrc
 .gitignore
-rollup.config.js
+
+babel.conifg.js

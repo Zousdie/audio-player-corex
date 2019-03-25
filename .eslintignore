@@ -3,4 +3,4 @@ esm
 lib
 node_modules
 demo
-public/index.html
+*.html
