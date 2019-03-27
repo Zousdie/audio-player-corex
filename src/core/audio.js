@@ -41,7 +41,7 @@ export default class AudioPlayer {
     return this.ins;
   }
 
-  constructor ({ onStateChange }) {
+  constructor ({ onStateChange } = { onStateChange: undefined }) {
     this.onStateChange = onStateChange;
 
     const { ins } = this;

@@ -29,7 +29,7 @@ export default class ACTXPlayer {
     return this.ins;
   }
 
-  constructor ({ onStateChange }) {
+  constructor ({ onStateChange } = { onStateChange: undefined }) {
     this.onStateChange = onStateChange;
   }
 

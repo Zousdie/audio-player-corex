@@ -18,4 +18,9 @@ function Playerx (options) {
 }
 
 export default Playerx;
-export { PLAYER_STATE, PLAYER_MODE };
+export {
+  AudioPlayer,
+  ACTXPlayer,
+  PLAYER_STATE,
+  PLAYER_MODE,
+};
