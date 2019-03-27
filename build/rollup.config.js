@@ -41,7 +41,7 @@ export default BABEL_MODULE !== 'umd'
     {
       input: 'src/index.js',
       output: {
-        file: 'dist/playerx.min.js',
+        file: 'lib/playerx.min.js',
         format: 'umd',
         name: 'Playerx',
         exports: 'named',
