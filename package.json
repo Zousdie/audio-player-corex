@@ -13,7 +13,8 @@
   "scripts": {
     "dev": "rollup -c build/rollup.dev.js --environment BABEL_MODULE:umd --watch",
     "build": "rollup -c build/rollup.config.js && rollup -c build/rollup.config.js --environment BABEL_MODULE:umd",
-    "prebuild": "rm -rf lib & rm -rf esm & rm -rf demo"
+    "prebuild": "rm -rf lib & rm -rf esm & rm -rf demo",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
