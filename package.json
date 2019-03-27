@@ -1,6 +1,6 @@
 {
   "name": "audio-playerx",
-  "version": "1.0.0-0",
+  "version": "1.0.0-1",
   "description": "Audio player in the browser",
   "main": "lib/index.js",
   "module": "esm/index.js",
