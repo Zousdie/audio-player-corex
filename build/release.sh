@@ -24,6 +24,8 @@ git push
 
 git push origin --tags
 
+npm publish
+
 git checkout dev
 
 git rebase master
