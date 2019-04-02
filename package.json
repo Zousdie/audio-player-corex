@@ -2,41 +2,42 @@
   "name": "audio-playerx",
   "version": "1.0.0",
   "description": "Audio player in the browser",
-  "main": "lib/index.js",
-  "module": "esm/index.js",
-  "typings": "types/index.d.ts",
-  "files": [
-    "lib",
-    "esm",
-    "types",
-    "demo"
-  ],
-  "scripts": {
-    "dev": "rollup -c build/rollup.dev.js --environment BABEL_MODULE:umd --watch",
-    "build": "rollup -c build/rollup.config.js && rollup -c build/rollup.config.js --environment BABEL_MODULE:umd",
-    "prebuild": "rm -rf lib & rm -rf esm & rm -rf demo",
-    "prepublish": "npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Zousdie/audio-player-corex.git"
-  },
   "keywords": [
     "audio",
     "player"
   ],
   "author": "Jialiang T. (rememhe@outlook.com)",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zousdie/audio-player-corex.git"
+  },
   "bugs": {
     "url": "https://github.com/Zousdie/audio-player-corex/issues"
   },
   "homepage": "https://github.com/Zousdie/audio-player-corex#readme",
+  "files": [
+    "lib",
+    "esm",
+    "types",
+    "demo"
+  ],
+  "main": "lib/index.js",
+  "module": "esm/index.js",
+  "typings": "types/index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "dev": "rollup -c build/rollup.dev.js --environment BABEL_MODULE:umd --watch",
+    "build": "rollup -c build/rollup.config.js && rollup -c build/rollup.config.js --environment BABEL_MODULE:umd",
+    "prebuild": "rm -rf lib & rm -rf esm & rm -rf demo",
+    "prepublish": "npm run build"
+  },
   "dependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/runtime": "^7.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/plugin-transform-runtime": "^7.4.0",
     "@babel/preset-env": "^7.4.2",
     "babel-eslint": "^10.0.1",
