@@ -55,7 +55,7 @@ export default BABEL_MODULE !== 'umd'
     {
       input: 'examples/index.js',
       output: {
-        file: 'demo/playerx.min.js',
+        file: 'dist/examples.min.js',
         format: 'umd',
         name: 'Playerx',
         exports: 'named',

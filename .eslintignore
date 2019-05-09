@@ -2,6 +2,5 @@ dist
 esm
 lib
 node_modules
-demo
 *.html
 types

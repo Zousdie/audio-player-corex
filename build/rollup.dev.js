@@ -6,31 +6,29 @@ import html from 'rollup-plugin-fill-html';
 import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
 
-const eslintPlugin = eslint({
-  throwOnError: true,
-  throwOnWarning: false,
-  include: ['src/**'],
-  exclude: ['node_modules/**'],
-});
-
 export default {
   input: 'examples/index.js',
   output: {
-    file: 'demo/playerx.min.js',
+    file: 'dist/examples.min.js',
     format: 'umd',
     name: 'Playerx',
     exports: 'named',
     sourcemap: true,
   },
   plugins: [
-    eslintPlugin,
+    eslint({
+      throwOnError: true,
+      throwOnWarning: false,
+      include: ['src/**'],
+      exclude: ['node_modules/**'],
+    }),
     babel(),
     uglify(),
     html({
       template: 'examples/index.html',
       filename: 'index.html',
     }),
-    serve('demo'),
+    serve('dist'),
     livereload(),
   ],
   watch: {
