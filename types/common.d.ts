@@ -1,5 +1,5 @@
 export enum PLAYER_STATE {
-  READY = 0,
+  READY,
   LOADING,
   PLAYING,
   PAUSED,
@@ -8,8 +8,8 @@ export enum PLAYER_STATE {
 }
 
 export enum PLAYER_MODE {
-  Audio = 0,
-  AudioContext
+  Audio = 'audio',
+  AudioContext = 'actx'
 }
 
 export type onStateChange = (value: PLAYER_STATE) => any;

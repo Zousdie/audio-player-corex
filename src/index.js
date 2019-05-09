@@ -1,7 +1,6 @@
-import PLAYER_STATE from './state';
-import PLAYER_MODE from './mode';
 import AudioPlayer from './core/audio';
 import ACTXPlayer from './core/actx';
+import { PLAYER_STATE, PLAYER_MODE } from './enum';
 
 function Playerx (options) {
   const { mode } = options;

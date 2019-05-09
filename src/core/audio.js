@@ -1,10 +1,8 @@
-import PLAYER_STATE from '../state';
+import { PLAYER_STATE } from '../enum';
 
 const EMPTY_AUDIO = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAVFYAAFRWAAABAAgAZGF0YQAAAAA=';
 
 export default class AudioPlayer {
-  _state = PLAYER_STATE.READY;
-
   _p = null;
 
   _resolve = null;
@@ -15,7 +13,24 @@ export default class AudioPlayer {
 
   ins = new Audio();
 
+  state = PLAYER_STATE.READY;
+
   onStateChange = null;
+
+  get _state () {
+    return this.state;
+  }
+
+  set _state (value) {
+    if (typeof this.onStateChange === 'function' && value !== this.state) {
+      this.state = value;
+      this.onStateChange(value);
+    }
+  }
+
+  get runner () {
+    return this.ins;
+  }
 
   get resource () {
     return this.ins.src;
@@ -23,22 +38,6 @@ export default class AudioPlayer {
 
   set resource (value) {
     this.ins.src = value;
-  }
-
-  get state () {
-    return this._state;
-  }
-
-  set state (value) {
-    if (typeof this.onStateChange === 'function' && value !== this._state) {
-      this.onStateChange(value);
-    }
-
-    this._state = value;
-  }
-
-  get runner () {
-    return this.ins;
   }
 
   constructor ({ onStateChange } = { onStateChange: undefined }) {
@@ -52,7 +51,7 @@ export default class AudioPlayer {
         return;
       }
 
-      this.state = PLAYER_STATE.FAILED;
+      this._state = PLAYER_STATE.FAILED;
 
       if (this._reject) {
         this._reject(error);
@@ -65,10 +64,10 @@ export default class AudioPlayer {
         return;
       }
 
-      this.state = PLAYER_STATE.LOADING;
+      this._state = PLAYER_STATE.LOADING;
     };
 
-    ins.oncanplaythrough = () => {
+    ins.oncanplay = () => {
       // abort
       if (this.resource === EMPTY_AUDIO) {
         return;
@@ -78,36 +77,36 @@ export default class AudioPlayer {
     };
 
     ins.onplay = () => {
-      this.state = PLAYER_STATE.PLAYING;
+      this._state = PLAYER_STATE.PLAYING;
     };
 
     ins.onended = () => {
-      this.state = PLAYER_STATE.READY;
+      this._state = PLAYER_STATE.READY;
 
       if (this._resolve) {
-        this._resolve(this.state);
+        this._resolve(this._state);
       }
     };
 
     ins.onpause = () => {
-      this.state = PLAYER_STATE.PAUSED;
+      this._state = PLAYER_STATE.PAUSED;
     };
 
     ins.onwaiting = () => {
-      this.state = PLAYER_STATE.LOADING;
+      this._state = PLAYER_STATE.LOADING;
     };
 
     ins.onplaying = () => {
-      this.state = PLAYER_STATE.PLAYING;
+      this._state = PLAYER_STATE.PLAYING;
     };
   }
 
   play (resource = null) {
-    if (this.state === PLAYER_STATE.LOADING && this.resource === resource && this.ins.currentTime === 0) {
+    if (this._state === PLAYER_STATE.LOADING && this.resource === resource && this.ins.currentTime === 0) {
       return this._p;
     }
 
-    if (this.state === PLAYER_STATE.PAUSED && resource === null) {
+    if (this._state === PLAYER_STATE.PAUSED && resource === null) {
       this._p = new Promise((r, j) => {
         this._resolve = r;
         this._reject = j;
@@ -123,8 +122,8 @@ export default class AudioPlayer {
       return this._p;
     }
 
-    if (this.state !== PLAYER_STATE.READY && this._resolve) {
-      this._resolve(this.state);
+    if (this._state !== PLAYER_STATE.READY && this._resolve) {
+      this._resolve(this._state);
     }
 
     this._p = new Promise((r, j) => {
@@ -132,7 +131,7 @@ export default class AudioPlayer {
       this._reject = j;
     });
 
-    if (this.state === PLAYER_STATE.READY && this.resource === resource) {
+    if (this._state === PLAYER_STATE.READY && this.resource === resource) {
       this.ins.currentTime = 0;
       this.ins.play();
     } else {
@@ -144,13 +143,13 @@ export default class AudioPlayer {
   }
 
   pause () {
-    switch (this.state) {
+    switch (this._state) {
       case PLAYER_STATE.PLAYING:
         this.ins.pause();
         break;
 
       case PLAYER_STATE.LOADING:
-        this.state = PLAYER_STATE.PAUSED;
+        this._state = PLAYER_STATE.PAUSED;
         this._cancelBuffer = this.resource;
         this.resource = EMPTY_AUDIO;
         break;
@@ -163,7 +162,7 @@ export default class AudioPlayer {
     }
 
     if (this._resolve) {
-      this._resolve(this.state);
+      this._resolve(this._state);
     }
   }
 }

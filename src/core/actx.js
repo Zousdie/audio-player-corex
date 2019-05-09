@@ -1,8 +1,6 @@
-import PLAYER_STATE from '../state';
+import { PLAYER_STATE } from '../enum';
 
 export default class ACTXPlayer {
-  _state = PLAYER_STATE.READY;
-
   _sourceNode = null;
 
   _resolve = null;
@@ -11,18 +9,20 @@ export default class ACTXPlayer {
 
   ins = new (window.AudioContext || window.webkitAudioContext)();
 
+  state = PLAYER_STATE.READY;
+
   onStateChange = null;
 
-  get state () {
-    return this._state;
+  get _state () {
+    return this.state;
   }
 
-  set state (value) {
-    if (typeof this.onStateChange === 'function' && value !== this._state) {
+  set _state (value) {
+    if (typeof this.onStateChange === 'function' && value !== this.state) {
       this.onStateChange(value);
     }
 
-    this._state = value;
+    this.state = value;
   }
 
   get runner () {
@@ -41,7 +41,7 @@ export default class ACTXPlayer {
       this._reject = j;
     });
 
-    this.state = PLAYER_STATE.LOADING;
+    this._state = PLAYER_STATE.LOADING;
     const _sourceNode = this.runner.createBufferSource();
     this._sourceNode = _sourceNode;
 
@@ -53,18 +53,18 @@ export default class ACTXPlayer {
         }
 
         _sourceNode.onended = () => {
-          this.state = PLAYER_STATE.END;
+          this._state = PLAYER_STATE.END;
           if (this._resolve) {
-            this._resolve(this.state);
+            this._resolve(this._state);
           }
         };
         _sourceNode.buffer = data;
         _sourceNode.connect(this.runner.destination);
         _sourceNode.start(0);
-        this.state = PLAYER_STATE.PLAYING;
+        this._state = PLAYER_STATE.PLAYING;
       },
       (error) => {
-        this.state = PLAYER_STATE.FAILED;
+        this._state = PLAYER_STATE.FAILED;
         if (this._reject) {
           this._reject(error);
         }
@@ -75,12 +75,12 @@ export default class ACTXPlayer {
   }
 
   stop () {
-    this.state = PLAYER_STATE.READY;
+    this._state = PLAYER_STATE.READY;
     if (this._sourceNode) {
       this._sourceNode.stop();
     }
     if (this._resolve) {
-      this._resolve(this.state);
+      this._resolve(this._state);
     }
   }
 
@@ -91,6 +91,6 @@ export default class ACTXPlayer {
     this._reject = null;
     this._resolve = null;
     this.ins = null;
-    this.state = PLAYER_STATE.DESTROYED;
+    this._state = PLAYER_STATE.DESTROYED;
   }
 }

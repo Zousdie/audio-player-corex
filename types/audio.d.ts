@@ -1,25 +1,19 @@
 import { PLAYER_STATE, onStateChange, PlayerxConstructorOptions } from './common';
 
-export interface AudioPlayer {
-  ins: HTMLAudioElement,
+export default class AudioPlayer {
+  readonly ins: HTMLAudioElement
 
-  onStateChange: onStateChange | null | undefined,
+  readonly runner: HTMLAudioElement
 
-  resource: string,
+  readonly state: PLAYER_STATE
 
-  state: PLAYER_STATE,
+  onStateChange?: onStateChange
 
-  runner: HTMLAudioElement,
+  resource?: string
 
-  play: (resource: string | undefined) => Promise<PLAYER_STATE | undefined>,
+  constructor ({ onStateChange }?: PlayerxConstructorOptions)
+
+  play: (resource?: string) => Promise<PLAYER_STATE | undefined>
 
   pause: () => void
 }
-
-export interface AudioPlayerConstructor {
-  new(options?: PlayerxConstructorOptions): AudioPlayer
-}
-
-declare let AudioPlayer: AudioPlayerConstructor;
-
-export default AudioPlayer;

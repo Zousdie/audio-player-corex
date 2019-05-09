@@ -1,25 +1,21 @@
 import { PLAYER_STATE, onStateChange, PlayerxConstructorOptions } from './common';
 
-export interface ACTXPlayer {
-  ins: AudioContext,
+export default class ACTXPlayer {
+  readonly ins: AudioContext
 
-  onStateChange: onStateChange | null,
+  readonly runner: AudioContext
 
-  state: PLAYER_STATE,
+  readonly state: PLAYER_STATE
 
-  runner: AudioContext,
+  onStateChange?: onStateChange
 
-  play: (buffer: ArrayBuffer) => Promise<PLAYER_STATE | undefined>,
+  resource?: string
+
+  constructor ({ onStateChange }?: PlayerxConstructorOptions)
+
+  play: (buffer: ArrayBuffer) => Promise<PLAYER_STATE | undefined>
 
   stop: () => void
 
   close: () => void
 }
-
-export interface ACTXPlayerConstructor {
-  new(options?: PlayerxConstructorOptions): ACTXPlayer
-}
-
-declare let ACTXPlayer: ACTXPlayerConstructor;
-
-export default ACTXPlayer;

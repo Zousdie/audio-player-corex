@@ -1,11 +1,9 @@
 import { PLAYER_STATE, PLAYER_MODE, onStateChange } from './common';
-import { AudioPlayer } from './audio';
-import { ACTXPlayer } from './actx';
+import AudioPlayer from './audio';
+import ACTXPlayer from './actx';
 
-type Playerx = (options: {
-  mode: PLAYER_MODE,
-  onStateChange?: onStateChange
-}) => never | AudioPlayer | ACTXPlayer;
+declare function Playerx ({ mode, onStateChange }: { mode: PLAYER_MODE.Audio, onStateChange?: onStateChange }): AudioPlayer
+declare function Playerx ({ mode, onStateChange }: { mode: PLAYER_MODE.AudioContext, onStateChange?: onStateChange }): ACTXPlayer
 
 export default Playerx;
 export {
